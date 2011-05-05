@@ -39,7 +39,7 @@ To get the list of filters:
 
 <pre><code>filters = aviaryfx.getFilters()
 print filters
-</pre></code>
+</code></pre>
 
 ## Upload an image to the AviaryFX Service
 
