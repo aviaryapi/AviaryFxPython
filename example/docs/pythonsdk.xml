@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<namespaces>
+  <namespace name='' typeoverride=''>
+    <class name='AviaryFX' typeoverride=''>
+      <description>
+		<![CDATA[AviaryFX Python SDK]]>
+      </description>
+      <properties>
+      </properties>
+
+      <methods>
+
+        <method name='getFilters'>
+          <description>
+            <![CDATA[Gets a list of FilterInfo object which contain information for the available filters.]]>
+          </description>
+          <params>
+          </params>
+          <returns>
+            List of FilterInfo objects which contain label, uid, description and parameter list for each filter.
+          </returns>
+          <codesample>
+
+            <![CDATA[
+filters = aviaryfx.getFilters()
+print filters]]>
+          </codesample>
+        </method>
+
+        <method name='upload'>
+          <description>
+            <![CDATA[
+				 	Uploads an image to the Aviary server.
+				 ]]>
+          </description>
+          <params>
+            <param name='pathToFile' required='True' type='String'>
+				<description><![CDATA[Path to the file to be uploaded.]]></description>
+			</param>
+          </params>
+          <returns>
+            Dictionary with url to the uploaded file.
+          </returns>
+          <codesample>
+            <![CDATA[
+pathToFile = "path/to/file.jpg"
+uploadResponse = aviaryfx.upload(pathToFile)
+print uploadResponse]]>
+          </codesample>
+        </method>
+
+        <method name='renderOptions'>
+
+          <description>
+            <![CDATA[Renders a filter options thumbnail grid and returns render parameters for each option.]]>
+          </description>
+          <params>
+            <param name='backgroundcolor' required='True' type='String'>
+				<description><![CDATA[Background color for transparent uploads. Format: Hex values for Red Green Blue Alpha. Example: 0xFFFFFFFF]]></description>
+			</param>
+            <param name='format' required='True' type='String'>
+				<description><![CDATA[Rendered file format - JPG/PNG.]]></description>
+			</param>
+            <param name='quality' required='True' type='String'>
+				<description><![CDATA[Rendered file quality for JPG files. Value from 1-100]]></description>
+			</param>
+            <param name='scale' required='True' type='String'>
+				<description><![CDATA[Scale of the image. Value 0.0-1.0.]]></description>
+			</param>
+            <param name='filepath' required='True' type='String'>
+				<description><![CDATA[The url retrieved using the upload method.]]></description>
+			</param>
+            <param name='filterid' required='True' type='String'>
+				<description><![CDATA[ID of the filter.]]></description>
+			</param>
+            <param name='cols' required='True' type='String'>
+				<description><![CDATA[The number of columns to render in thumbnail grid.]]></description>
+			</param>
+            <param name='rows' required='True' type='String'>
+				<description><![CDATA[The number of rows to render in thumbnail grid.]]></description>
+			</param>
+            <param name='cellwidth' required='True' type='String'>
+				<description><![CDATA[The width of each cell in thumbnail grid.]]></description>
+			</param>
+            <param name='cellheight' required='True' type='String'>
+				<description><![CDATA[The height of each cell in thumbnail grid]]></description>
+			</param>
+          </params>
+          <returns>
+            Dictionary with url to thumbnail grid and render option parameters
+          </returns>
+
+          <codesample>
+            <![CDATA[
+backgroundColor = "0xFFFFFFFF"
+format = "jpg"
+quality = "100"
+scale = "1"
+filterid = "22"
+filepath = uploadedFileUrl
+cols = "3"
+rows = "3"
+cellWidth = "128"
+cellHeight = "128"
+renderOptionsResponse = aviaryfx.renderOptions(backgroundColor, format, quality, scale, filepath, filterid, cols, rows, cellWidth, cellHeight)
+print renderOptionsResponse]]>
+          </codesample>
+        </method>
+
+        <method name='render'>
+          <description>
+            <![CDATA[Renders image based on render parameters.]]>
+          </description>
+          <params>
+            <param name='backgroundcolor' required='True' type='String'>
+				<description><![CDATA[Background color for transparent uploads. Format: Hex values for Red Green Blue Alpha. Example: 0xFFFFFFFF]]></description>
+			</param>
+            <param name='format' required='True' type='String'>
+				<description><![CDATA[Rendered file format - JPG/PNG.]]></description>
+			</param>
+            <param name='quality' required='True' type='String'>	
+				<description><![CDATA[Rendered file quality for JPG files. Value from 1-100]]></description>
+			</param>
+            <param name='scale' required='True' type='String'>
+				<description><![CDATA[Scale of the image. Value 0.0-1.0.]]></description>
+			</param>
+            <param name='filepath' required='True' type='String'>
+				<description><![CDATA[The url retrieved using AviaryFX->upload.]]></description>
+			</param>
+            <param name='filterid' required='True' type='String'>
+				<description><![CDATA[ID of the filter.]]></description>
+			</param>
+            <param name='width' required='True' type='String'>
+				<description><![CDATA[The width of the rendered image. 0 returns original width.]]></description>
+			</param>
+            <param name='height' required='True' type='String'>
+				<description><![CDATA[The height of the rendered image. 0 returns original height.]]></description>
+			</param>
+            <param name='renderparameters' required='True' type='List'>
+				<description><![CDATA[(Optional) Filter render parameters retrieved from AviaryFX->renderOptions]]></description>
+			</param>
+          </params>
+          <returns>
+             Dictionary with URL to rendered image
+          </returns>
+          <codesample>
+            <![CDATA[
+backgroundColor = "0xFFFFFFFF"
+format = "jpg"
+quality = "100"
+scale = "1"
+width = "0"
+height = "0"
+filterid = "22"
+filepath = uploadedFileUrl
+renderParameters = [{"id":"Gamma","value":"2.6706531248452734"},{"id":"Smoothing","value":"4"},{"id":"Caption Index","value":"50"}]
+renderResponse = aviaryfx.render(backgroundColor, format, quality, scale, filepath, filterid, width, height, renderParameters)
+print renderResponse]]>
+
+          </codesample>
+        </method>
+
+      </methods>
+    </class>
+  </namespace>
+</namespaces>
