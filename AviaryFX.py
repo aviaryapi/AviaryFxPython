@@ -20,7 +20,7 @@ class AviaryFX(object):
     '''
     
     VERSION = "0.2"
-    PLATFORM = "web"
+    PLATFORM = "html"
     HARDWARE_VERSION = "1.0"
     SOFTWARE_VERSION = "Python"
     APP_VERSION = "1.0"
@@ -140,7 +140,7 @@ class AviaryFX(object):
         params["rows"] = rows
         params["cellwidth"] = cellWidth
         params["cellheight"] = cellHeight
-        params["calltype"] = "filteruse"
+        params["calltype"] = "previewRender"
         params["api_sig"] = self.getApiSignature(params)
         result = self.request(self.SERVER + self.RENDER_URL, params)
         xml = minidom.parse(result)
